@@ -152,6 +152,8 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - install_awscli
+      - install_ansible
       - run:
           name: Ensure back-end infrastructure exists
           command: |
