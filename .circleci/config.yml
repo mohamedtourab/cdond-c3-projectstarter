@@ -73,7 +73,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-deps]
+          keys: ['frontend-deps-{{ checksum "frontend/package-lock.json" }}']
       - run:
           name: Build front-end
           command: |
@@ -82,7 +82,7 @@ jobs:
             npm run build
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-deps
+          key: 'frontend-deps-{{ checksum "frontend/package-lock.json" }}'
 
   build-backend:
     docker:
@@ -90,7 +90,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-deps]
+          keys: ['backend-deps-{{ checksum "backend/package-lock.json" }}']
       - run:
           name: Back-end build
           command: |
@@ -99,7 +99,7 @@ jobs:
              npm run build
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-deps
+          key: 'backend-deps-{{ checksum "backend/package-lock.json" }}'
 
   test-frontend:
     docker:
@@ -107,7 +107,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-deps]
+          keys: ['backend-deps-{{ checksum "backend/package-lock.json" }}']
       - run:
           name: Front-end unit test
           command: |
@@ -121,7 +121,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-deps]
+          keys: ['backend-deps-{{ checksum "backend/package-lock.json" }}']
       - run:
           name: Back-end unit test
           command: |
@@ -135,7 +135,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-deps]
+          keys: ['backend-deps-{{ checksum "backend/package-lock.json" }}']
       - run:
           name: front-end scan
           command: |
@@ -151,7 +151,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-deps]
+          keys: ['backend-deps-{{ checksum "backend/package-lock.json" }}']
       - run:
           name: Back-end scan
           command: |
@@ -228,7 +228,7 @@ jobs:
       - install_awscli
       - install_nodejs
       - restore_cache:
-          keys: [backend-deps]
+          keys: ['backend-deps-{{ checksum "backend/package-lock.json" }}']
       - run:
           name: Run migrations
           command: |
@@ -257,7 +257,7 @@ jobs:
       - install_awscli
       - install_nodejs
       - restore_cache:
-          keys: [frontend-deps]
+          keys: ['frontend-deps-{{ checksum "frontend/package-lock.json" }}']
       - run:
           name: Install dependencies
           command: |
@@ -292,7 +292,7 @@ jobs:
       - attach_workspace:
           at: ~/
       - restore_cache:
-          keys: [backend-deps]
+          keys: ['backend-deps-{{ checksum "backend/package-lock.json" }}']
       - run:
           name: Install dependencies
           command: |
@@ -383,8 +383,8 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
-      # - test-frontend:
-      #     requires: [build-frontend]
+      - test-frontend:
+          requires: [build-frontend]
       - test-backend:
           requires: [build-backend]
       - scan-backend:
