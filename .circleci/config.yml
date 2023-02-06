@@ -85,11 +85,7 @@ jobs:
           name: Install front-end deps
           command: |
             cd frontend
-            npm install
-            sudo chown -R root:users /usr/local/lib/node_modules
-            npm install typescript -g
-            npm install -g webpack
-            
+            npm ci
       - run:
           name: Build front-end
           command: |
@@ -110,10 +106,7 @@ jobs:
           name: Back-end install deps
           command: |
              cd backend
-             npm install
-             sudo chown -R root:users /usr/local/lib/node_modules
-             npm install typescript -g
-             npm install -g webpack
+             npm ci
       - run:
           name: Back-end build
           command: |
@@ -134,10 +127,7 @@ jobs:
           name: Front-end install deps
           command: |
              cd frontend
-             npm install
-             sudo chown -R root:users /usr/local/lib/node_modules -y
-             npm install typescript -g
-             npm install -g webpack
+             npm ci
       - run:
           name: Front-end unit test
           command: |
@@ -155,10 +145,7 @@ jobs:
           name: Install dependencies
           command: |
             cd backend
-            npm install
-            sudo chown -R root:users /usr/local/lib/node_modules
-            npm install typescript -g
-            npm install -g webpack
+            npm ci
       - run:
           name: Run backend unit tests
           command: |
