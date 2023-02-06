@@ -86,6 +86,8 @@ jobs:
           command: |
             cd frontend
             npm install
+            npm install typescript -g
+            npm install -g webpack
             
       - run:
           name: Build front-end
@@ -151,6 +153,8 @@ jobs:
           command: |
             cd backend
             npm install
+            npm install typescript -g
+            npm install -g webpack
       - run:
           name: Run backend unit tests
           command: |
