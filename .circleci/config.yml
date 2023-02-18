@@ -76,7 +76,7 @@ commands:
 jobs:
   build-frontend:
     docker:
-        - image: circleci/node:lts
+        - image: cimg/node:13.8.0
     steps:
         - checkout
         - restore_cache:
@@ -92,7 +92,7 @@ jobs:
               key: frontend-build
   build-backend:
     docker:
-        - image: circleci/node:lts
+        - image: cimg/node:13.8.0
     steps:
         - checkout
         - restore_cache:
@@ -113,7 +113,7 @@ jobs:
 
   test-frontend:
     docker:
-        - image: circleci/node:lts
+        - image: cimg/node:13.8.0
     steps:
         - checkout
         - restore_cache:
@@ -127,7 +127,7 @@ jobs:
                 
   test-backend:
     docker:
-        - image: circleci/node:lts
+        - image: cimg/node:13.8.0
     steps:
         - checkout
         - restore_cache:
