@@ -99,7 +99,7 @@ jobs:
               keys: [backend-build]
         - run:
               name: Install NPM dependencies
-              command: cd backend && npm install
+              command: cd backend && npm install && npm install typescript -g
         - run:
               name: Build back-end
               command: cd backend && npm run build
@@ -154,7 +154,7 @@ jobs:
              cd backend
              npm install
              npm audit fix --force --audit-level=critical
-             npm audit fix --force --audit-level=critical
+             npm audit fix --force --qaudit-level=critical
              npm audit --audit-level=critical
 
   scan-backend:
